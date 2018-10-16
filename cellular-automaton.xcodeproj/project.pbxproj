@@ -10,6 +10,9 @@
 		FECFD8972174979300623A92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECFD8962174979300623A92 /* AppDelegate.swift */; };
 		FECFD8992174979400623A92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FECFD8982174979400623A92 /* Assets.xcassets */; };
 		FECFD89C2174979400623A92 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FECFD89A2174979400623A92 /* MainMenu.xib */; };
+		FECFD8A52174993600623A92 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECFD8A42174993600623A92 /* MetalViewController.swift */; };
+		FECFD8A721749CAD00623A92 /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = FECFD8A621749CAD00623A92 /* Shader.metal */; };
+		FECFD8A92174A5FC00623A92 /* DisplayLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECFD8A82174A5FC00623A92 /* DisplayLink.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		FECFD89B2174979400623A92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FECFD89D2174979400623A92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FECFD89E2174979400623A92 /* cellular_automaton.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cellular_automaton.entitlements; sourceTree = "<group>"; };
+		FECFD8A42174993600623A92 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
+		FECFD8A621749CAD00623A92 /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
+		FECFD8A82174A5FC00623A92 /* DisplayLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLink.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,11 +57,14 @@
 		FECFD8952174979300623A92 /* cellular-automaton */ = {
 			isa = PBXGroup;
 			children = (
+				FECFD8A42174993600623A92 /* MetalViewController.swift */,
+				FECFD8A621749CAD00623A92 /* Shader.metal */,
 				FECFD8962174979300623A92 /* AppDelegate.swift */,
 				FECFD8982174979400623A92 /* Assets.xcassets */,
 				FECFD89A2174979400623A92 /* MainMenu.xib */,
 				FECFD89D2174979400623A92 /* Info.plist */,
 				FECFD89E2174979400623A92 /* cellular_automaton.entitlements */,
+				FECFD8A82174A5FC00623A92 /* DisplayLink.swift */,
 			);
 			path = "cellular-automaton";
 			sourceTree = "<group>";
@@ -130,6 +139,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FECFD8A92174A5FC00623A92 /* DisplayLink.swift in Sources */,
+				FECFD8A721749CAD00623A92 /* Shader.metal in Sources */,
+				FECFD8A52174993600623A92 /* MetalViewController.swift in Sources */,
 				FECFD8972174979300623A92 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

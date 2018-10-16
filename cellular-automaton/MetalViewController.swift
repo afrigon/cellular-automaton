@@ -62,7 +62,7 @@ class MetalViewController: NSViewController {
     private var pipelineState: MTLRenderPipelineState!
     private var commandQueue: MTLCommandQueue!
     
-    private var cells: [Cell] = [Cell]()
+    private var cells: [[Cell]] = [[Cell]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,12 +84,14 @@ class MetalViewController: NSViewController {
     
     private func initializeData(width: Float, height: Float, cellSize: Float = 5.0) {
         for y in 0..<Int(height / cellSize) {
+            var row = [Cell]()
             for x in 0..<Int(width / cellSize) {
                 let originX: Float = (Float(x) * cellSize) / (width / 2) - 1
                 let originY: Float = (Float(y) * cellSize) / (height / 2) - 1
                 let quad = Quad(x: originX, y: -originY, width: cellSize, height: -cellSize, self.device)
-                self.cells.append(Cell(quad, color: Float(Int.random(in: 0...1))))
+                row.append(Cell(quad, color: Float(Int.random(in: 0...1))))
             }
+            self.cells.append(row)
         }
     }
     
@@ -128,8 +130,10 @@ class MetalViewController: NSViewController {
         let encoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
         encoder?.setRenderPipelineState(pipelineState)
         
-        for cell in self.cells {
-            cell.draw(encoder)
+        for row in self.cells {
+            for cell in row {
+                cell.draw(encoder)
+            }
         }
         
         encoder?.endEncoding()

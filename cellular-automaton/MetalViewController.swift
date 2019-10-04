@@ -61,6 +61,7 @@ class MetalViewController: NSViewController {
     private var metalLayer: CAMetalLayer!
     private var pipelineState: MTLRenderPipelineState!
     private var commandQueue: MTLCommandQueue!
+    private var displayLink: DisplayLink!
     
     private var cells: [[Cell]] = [[Cell]]()
     
@@ -79,7 +80,14 @@ class MetalViewController: NSViewController {
         
         self.pipelineState = self.compilePipeline()
         self.commandQueue = self.device.makeCommandQueue()
-        self.render()
+        self.displayLink = DisplayLink(onQueue: DispatchQueue.main)
+        self.displayLink.callback = self.gameloop
+        self.displayLink.start()
+    }
+    
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        self.displayLink.suspend()
     }
     
     private func initializeData(width: Float, height: Float, cellSize: Float = 5.0) {
@@ -113,8 +121,68 @@ class MetalViewController: NSViewController {
     }
     
     private func gameloop() {
+        self.update()
         autoreleasepool {
             self.render()
+        }
+    }
+    
+    private func update() {
+        self.applyRules()
+    }
+    
+    private func count(_ x: Int, _ y: Int) -> Int {
+        var count: Int = 0
+        for dx in -1...1 {
+            for dy in -1...1 {
+                let nx = x + dx
+                let ny = y + dy
+                
+                if nx <= -1 || nx >= self.cells[y].count
+                || ny <= -1 || ny >= self.cells.count
+                || (dx == 0 && dy == 0) {
+                    continue
+                }
+                
+                if (self.cells[y][x].color == 1.0) {
+                    count += 1
+                }
+            }
+        }
+        return count
+    }
+    
+    private func applyRules() {
+        struct Updates {
+            var x: Int
+            var y: Int
+            var state: Int
+            init(_ x: Int, _ y: Int, _ state: Int) {
+                self.x = x
+                self.y = y
+                self.state = state
+            }
+        }
+        var nextGeneration = [Updates]()
+        
+        for y in 0..<self.cells.count {
+            for x in 0..<self.cells[y].count {
+                let living: Int = self.count(x, y)
+                
+                if self.cells[y][x].color == 1.0 {
+                    if living < 2 || living > 3 {
+                        nextGeneration.append(Updates(x, y, 0))
+                    }
+                } else {
+                    if living == 3 {
+                        nextGeneration.append(Updates(x, y, 1))
+                    }
+                }
+            }
+        }
+        
+        for update in nextGeneration {
+            self.cells[update.y][update.x].color = Float(update.state)
         }
     }
     

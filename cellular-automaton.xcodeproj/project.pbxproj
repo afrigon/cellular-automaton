@@ -57,6 +57,7 @@
 		FECFD8952174979300623A92 /* cellular-automaton */ = {
 			isa = PBXGroup;
 			children = (
+				FECFD8A82174A5FC00623A92 /* DisplayLink.swift */,
 				FECFD8A42174993600623A92 /* MetalViewController.swift */,
 				FECFD8A621749CAD00623A92 /* Shader.metal */,
 				FECFD8962174979300623A92 /* AppDelegate.swift */,
@@ -64,7 +65,6 @@
 				FECFD89A2174979400623A92 /* MainMenu.xib */,
 				FECFD89D2174979400623A92 /* Info.plist */,
 				FECFD89E2174979400623A92 /* cellular_automaton.entitlements */,
-				FECFD8A82174A5FC00623A92 /* DisplayLink.swift */,
 			);
 			path = "cellular-automaton";
 			sourceTree = "<group>";
